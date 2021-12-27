@@ -1,8 +1,19 @@
 scrape_configs:
   - job_name: 'application'
     metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
     static_configs:
       - targets: ['application:8080']
+  - job_name: 'docker'
+      # metrics_path defaults to '/metrics'
+      # scheme defaults to 'http'.
+    scrape_interval: 1s
+    static_configs:
+      - targets: [ '172.17.0.1:9323' ]
+  - job_name: 'cadvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ 'cadvisor:6060' ]
 rule_files:
   - 'rules.yml'
 alerting:

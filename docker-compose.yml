@@ -2,6 +2,8 @@ version: "3"
 services:
   application:
     build: app
+    environment:
+      APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=f2b924a9-8018-40cd-936a-202991b38f94;IngestionEndpoint=https://eastus2-0.in.applicationinsights.azure.com/"
     ports:
       - "8080:8080"
       - "8010:8010"
@@ -9,7 +11,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     depends_on:
       - prometheus
   spring-boot-admin:
@@ -43,6 +45,10 @@ services:
     volumes:
       - ./grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./.grafana-data:/var/lib/grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
     depends_on:
       - prometheus
   cadvisor:

@@ -1,0 +1,30 @@
+{
+  "role": {
+    "name": "jvm-metrics-app"
+  },
+  "preview": {
+    "metricIntervalSeconds": 30
+  },
+  "jmxMetrics": [
+    {
+      "name": "Custom: Heap Memory Usage",
+      "objectName": "java.lang:type=Memory",
+      "attribute": "HeapMemoryUsage"
+    },
+    {
+      "name": "Custom: Non Heap Memory Usage",
+      "objectName": "java.lang:type=Memory",
+      "attribute": "NonHeapMemoryUsage"
+    },
+    {
+      "name": "Custom: Heap Memory Available",
+      "objectName": "java.lang:type=Memory",
+      "attribute": "FreeHeapMemory"
+    },
+    {
+      "name": "Custom: Non Heap Memory Available",
+      "objectName": "java.lang:type=Memory",
+      "attribute": "FreeNonHeapMemory"
+    }
+  ]
+}
